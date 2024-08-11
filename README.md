@@ -3,7 +3,7 @@
 ## WHY a new fork of Polyglot called Polyglot WTW
 
 To meet streamers' need for translation tools that work with StreamElements for widget creation, and to incorporate open source initiatives, this fork was created.
-If you don't want to use StreamElements, consider switching to the basic OBS proposal, which is the best alternative.
+If you don't want to use StreamElements, consider switching to the [original OBS proposal](https://github.com/locaal-ai/obs-polyglot), which is the best alternative.
 
 Thanks to Royshil for creating the obs plugin and core engine
 
