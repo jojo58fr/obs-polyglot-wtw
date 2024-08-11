@@ -1,4 +1,4 @@
-# Polyglot WTW (With Translation Widget( - Translation AI assistant OBS Plugin + Translation Widget support
+# Polyglot WTW (With Translation Widget) - Translation AI assistant OBS Plugin + Translation Widget support
 
 ## WHY a new fork of Polyglot called Polyglot WTW
 
