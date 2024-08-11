@@ -7,6 +7,16 @@ If you don't want to use StreamElements, consider switching to the basic OBS pro
 
 Thanks to Royshil for creating the obs plugin and core engine
 
+### Copyright
+
+Copyright (c) 2024 Joachim Miens (contact@joachim-miens.com)
+
+This application is licensed under the GPL V2 (see LICENCE).
+
+This base project is a fork of a project developed and maintained by [locaal-ai/obs-polyglot by Royshil](https://github.com/locaal-ai/obs-polyglot)
+
+
+
 ## Introduction
 
 Polyglot translation AI plugin allows you to translate text in multiple languages in real-time and locally on your machine. ✅ No GPU required, ✅ no cloud costs, ✅ no network and ✅ no downtime! Privacy first - all data stays on your machine.
