@@ -150,6 +150,7 @@ void resetContext(bool resetCallbacks)
 	global_context.translator = nullptr;
 	global_context.processor = nullptr;
 	global_context.svr = nullptr;
+	global_context.wtwsvr = nullptr;
 	if (resetCallbacks) {
 		global_context.error_callback = [](const std::string &error_message) {
 			global_context.error_message = error_message;
@@ -186,6 +187,10 @@ void freeContext(bool resetCallbacks)
 	if (global_context.svr != nullptr) {
 		delete global_context.svr;
 		global_context.svr = nullptr;
+	}
+	if (global_context.wtwsvr != nullptr) {
+		delete global_context.wtwsvr;
+		global_context.wtwsvr = nullptr;
 	}
 	resetContext(resetCallbacks);
 }

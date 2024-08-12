@@ -66,6 +66,8 @@ struct polyglot_global_context {
 	std::function<void(const std::string &)> status_callback;
 	// http server
 	httplib::Server *svr;
+	// http server
+	httplib::Server *wtwsvr;
 };
 
 extern polyglot_config_data global_config;

@@ -49,6 +49,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent), ui(new Ui::Se
 	}
 
 	this->ui->httpPort->setText(QString::number(global_config.http_server_port));
+	this->ui->wtwHttpPort->setText(QString::number(global_config.wtw_http_server_port));
 
 	connect(this->ui->comboBox_modelSelection,
 		QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index) {

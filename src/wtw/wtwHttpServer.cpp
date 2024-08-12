@@ -15,13 +15,13 @@ void start_wtw_http_server()
 
 	std::thread([]() {
 		// create the server
-		if (global_context.svr != nullptr) {
+		if (global_context.wtwsvr != nullptr) {
 			obs_log(LOG_INFO, "Polyglot WTW Http server already running, stopping...");
 			stop_wtw_http_server();
 		}
-		global_context.svr = new httplib::Server();
+		global_context.wtwsvr = new httplib::Server();
 
-		global_context.svr->set_pre_routing_handler([](const httplib::Request &,
+		global_context.wtwsvr->set_pre_routing_handler([](const httplib::Request &,
 							       httplib::Response &res) {
 			res.set_header("Access-Control-Allow-Origin", "*");
 			res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -31,7 +31,7 @@ void start_wtw_http_server()
 		});
 
 		// set an echo handler
-		global_context.svr->Post("/echo", [](const httplib::Request &req,
+		global_context.wtwsvr->Post("/echo", [](const httplib::Request &req,
 						     httplib::Response &res,
 						     const httplib::ContentReader &content_reader) {
 			UNUSED_PARAMETER(req);
@@ -48,7 +48,7 @@ void start_wtw_http_server()
 			res.set_content(body, "text/plain");
 		});
 		// set a translation handler
-		global_context.svr->Post(
+		global_context.wtwsvr->Post(
 			"/translate", [](const httplib::Request &req, httplib::Response &res,
 					 const httplib::ContentReader &content_reader) {
 				UNUSED_PARAMETER(req);
@@ -76,7 +76,7 @@ void start_wtw_http_server()
 		obs_log(LOG_INFO, "Polyglot Http server starting on port %d",
 			global_config.wtw_http_server_port);
 		try {
-			global_context.svr->listen("127.0.0.1", global_config.wtw_http_server_port);
+			global_context.wtwsvr->listen("127.0.0.1", global_config.wtw_http_server_port);
 		} catch (const std::exception &e) {
 			obs_log(LOG_ERROR, "Polyglot Http WTW server start error: %s", e.what());
 		}
@@ -92,12 +92,12 @@ void start_wtw_http_server()
 void stop_wtw_http_server()
 {
 	obs_log(LOG_INFO, "Stopping Polyglot WTW http server...");
-	if (global_context.svr == nullptr) {
+	if (global_context.wtwsvr == nullptr) {
 		obs_log(LOG_INFO, "Polyglot WTW Http server not running.");
 	} else {
-		global_context.svr->stop();
-		delete global_context.svr;
-		global_context.svr = nullptr;
+		global_context.wtwsvr->stop();
+		delete global_context.wtwsvr;
+		global_context.wtwsvr = nullptr;
 		global_context.status_callback("");
 	}
 }
