@@ -21,6 +21,9 @@ struct polyglot_config_data {
 	// http server port
 	uint16_t http_server_port;
 
+	// wtw http server port
+	uint16_t wtw_http_server_port;
+
 	// For Future Use:
 	// local or cloud
 	bool local;

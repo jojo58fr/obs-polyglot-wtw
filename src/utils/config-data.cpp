@@ -22,6 +22,7 @@ void config_defaults()
 	global_config.cloud_api_key = "";
 	global_config.max_output_tokens = 100;
 	global_config.http_server_port = 18080;
+	global_config.wtw_http_server_port = 18081;
 }
 
 void create_config_folder()
@@ -117,6 +118,7 @@ std::string config_data_to_json(const polyglot_config_data &data)
 	j["cloud_api_key"] = data.cloud_api_key;
 	j["max_output_tokens"] = data.max_output_tokens;
 	j["http_server_port"] = data.http_server_port;
+	j["wtw_http_server_port"] = data.wtw_http_server_port;
 	return j.dump();
 }
 
@@ -134,6 +136,7 @@ polyglot_config_data config_data_from_json(const std::string &json)
 		data.cloud_api_key = j["cloud_api_key"];
 		data.max_output_tokens = j["max_output_tokens"];
 		data.http_server_port = j["http_server_port"];
+		data.wtw_http_server_port = j["wtw_http_server_port"];
 	} catch (nlohmann::json::exception &e) {
 		obs_log(LOG_ERROR, "Failed to parse config data: %s", e.what());
 	}

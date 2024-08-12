@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>370</width>
-    <height>290</height>
+    <width>736</width>
+    <height>739</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>PolyGlot Settings</string>
+   <string>PolyGlot WTW Settings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -201,12 +201,44 @@
       <item row="1" column="1">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>By default the HTTP server listenes on 127.0.0.1:{port}</string>
+         <string>By default the HTTP server listenes on 127.0.0.1:18080</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
         </property>
        </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>WTW HTTP Server</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_6">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::ExpandingFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Port</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>By default the HTTP server listenes on 127.0.0.1:18081</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QLineEdit" name="wtwHttpPort"/>
       </item>
      </layout>
     </widget>

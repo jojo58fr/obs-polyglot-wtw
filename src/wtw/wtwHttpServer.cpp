@@ -1,4 +1,4 @@
-#include "httpserver.h"
+#include "wtwhttpserver.h"
 #include "utils/config-data.h"
 #include "plugin-support.h"
 #include "translation.h"
@@ -11,12 +11,12 @@
 // start the http server
 void start_http_server()
 {
-	obs_log(LOG_INFO, "Starting Polyglot http server thread...");
+	obs_log(LOG_INFO, "Starting Polyglot WTW http server thread...");
 
 	std::thread([]() {
 		// create the server
 		if (global_context.svr != nullptr) {
-			obs_log(LOG_INFO, "Polyglot Http server already running, stopping...");
+			obs_log(LOG_INFO, "Polyglot WTW Http server already running, stopping...");
 			stop_http_server();
 		}
 		global_context.svr = new httplib::Server();
@@ -74,26 +74,26 @@ void start_http_server()
 
 		// listen on the port
 		obs_log(LOG_INFO, "Polyglot Http server starting on port %d",
-			global_config.http_server_port);
+			global_config.wtw_http_server_port);
 		try {
-			global_context.svr->listen("127.0.0.1", global_config.http_server_port);
+			global_context.svr->listen("127.0.0.1", global_config.wtw_http_server_port);
 		} catch (const std::exception &e) {
-			obs_log(LOG_ERROR, "Polyglot Http server start error: %s", e.what());
+			obs_log(LOG_ERROR, "Polyglot Http WTW server start error: %s", e.what());
 		}
-		obs_log(LOG_INFO, "Polyglot Http server stopped.");
+		obs_log(LOG_INFO, "Polyglot Http WTW server stopped.");
 	}).detach();
 
 	global_context.status_callback("Ready for requests at http://localhost:" +
-				       std::to_string(global_config.http_server_port) +
+				       std::to_string(global_config.wtw_http_server_port) +
 				       "/translate");
 }
 
 // stop the http server
 void stop_http_server()
 {
-	obs_log(LOG_INFO, "Stopping Polyglot http server...");
+	obs_log(LOG_INFO, "Stopping Polyglot WTW http server...");
 	if (global_context.svr == nullptr) {
-		obs_log(LOG_INFO, "Polyglot Http server not running.");
+		obs_log(LOG_INFO, "Polyglot WTW Http server not running.");
 	} else {
 		global_context.svr->stop();
 		delete global_context.svr;

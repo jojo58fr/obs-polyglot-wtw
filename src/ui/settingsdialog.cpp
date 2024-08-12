@@ -128,6 +128,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) : QDialog(parent), ui(new Ui::Se
 		global_config.local_model_path = this->ui->modelFile->text().toStdString();
 		global_config.local_spm_path = this->ui->spmFile->text().toStdString();
 		global_config.http_server_port = this->ui->httpPort->text().toUShort();
+		global_config.wtw_http_server_port = this->ui->wtwHttpPort->text().toUShort();
 
 		// serialize to json and save to the OBS module settings
 		if (saveConfig(false) == OBS_POLYGLOT_CONFIG_SUCCESS) {
