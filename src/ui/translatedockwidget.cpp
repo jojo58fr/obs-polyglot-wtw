@@ -2,6 +2,7 @@
 #include "ui_translatedockwidget.h"
 #include "settingsdialog.h"
 #include "translation-service/httpserver.h"
+#include "wtw/wtwhttpserver.h"
 #include "utils/config-data.h"
 
 TranslateDockWidget::TranslateDockWidget(QWidget *parent)
@@ -20,10 +21,16 @@ TranslateDockWidget::TranslateDockWidget(QWidget *parent)
 	connect(ui->startStopHTTPServer, &QPushButton::clicked, this, [=]() {
 		// if the button is not checked, start the server
 		if (this->ui->startStopHTTPServer->isChecked())
+		{
 			start_http_server();
+			start_wtw_http_server();
+		}
 		// otherwise, stop the server
 		else
+		{
 			stop_http_server();
+			stop_wtw_http_server();
+		}
 	});
 }
 

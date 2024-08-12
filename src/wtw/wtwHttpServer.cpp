@@ -1,7 +1,7 @@
 #include "wtwhttpserver.h"
 #include "utils/config-data.h"
 #include "plugin-support.h"
-#include "translation.h"
+#include "translation-service/translation.h"
 
 #include <httplib.h>
 #include <obs-module.h>
@@ -9,7 +9,7 @@
 #include <nlohmann/json.hpp>
 
 // start the http server
-void start_http_server()
+void start_wtw_http_server()
 {
 	obs_log(LOG_INFO, "Starting Polyglot WTW http server thread...");
 
@@ -17,7 +17,7 @@ void start_http_server()
 		// create the server
 		if (global_context.svr != nullptr) {
 			obs_log(LOG_INFO, "Polyglot WTW Http server already running, stopping...");
-			stop_http_server();
+			stop_wtw_http_server();
 		}
 		global_context.svr = new httplib::Server();
 
@@ -89,7 +89,7 @@ void start_http_server()
 }
 
 // stop the http server
-void stop_http_server()
+void stop_wtw_http_server()
 {
 	obs_log(LOG_INFO, "Stopping Polyglot WTW http server...");
 	if (global_context.svr == nullptr) {

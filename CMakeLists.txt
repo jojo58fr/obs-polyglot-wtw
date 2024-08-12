@@ -44,7 +44,7 @@ add_subdirectory(src/ui)
 target_sources(
   ${CMAKE_PROJECT_NAME}
   PRIVATE src/translation-service/translation.cpp src/plugin-main.c src/utils/config-data.cpp
-          src/translation-service/httpserver.cpp src/model-utils/model-downloader.cpp
+          src/translation-service/httpserver.cpp src/wtw/wtwhttpserver.cpp src/model-utils/model-downloader.cpp
           src/model-utils/model-downloader-ui.cpp)
 
 set_target_properties_plugin(${CMAKE_PROJECT_NAME} PROPERTIES OUTPUT_NAME ${_name})
