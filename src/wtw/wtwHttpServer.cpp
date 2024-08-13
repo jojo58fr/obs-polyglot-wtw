@@ -21,14 +21,37 @@ void start_wtw_http_server()
 		}
 		global_context.wtwsvr = new httplib::Server();
 
-		global_context.wtwsvr->set_pre_routing_handler([](const httplib::Request &,
+		global_context.wtwsvr->set_pre_routing_handler([](const httplib::Request &req,
 							       httplib::Response &res) {
 			res.set_header("Access-Control-Allow-Origin", "*");
-			res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-			res.set_header("Access-Control-Allow-Headers",
-				       "Content-Type, Authorization");
+			res.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+			res.set_header("Access-Control-Allow-Credentials", "true");
+			
+			res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+			std::string infoFormat = "POLYGLOT WTW - Received request EN PREREQUEST: " + req.path + " || " + req.method;
+			obs_log(LOG_INFO, infoFormat.c_str() );
+
+			// Si la requête est une requête préliminaire OPTIONS
+			if (req.method == "OPTIONS") {
+				// Répondre avec un statut 204 No Content
+				res.status = 204;
+				return httplib::Server::HandlerResponse::Handled;
+			}
+
 			return httplib::Server::HandlerResponse::Unhandled;
 		});
+
+		/*global_context.wtwsvr->Options(R"(\*)", [](const auto& req, auto& res) {
+			res.set_header("Allow", "GET, POST, HEAD, OPTIONS");
+		});
+
+		global_context.wtwsvr->Options("/translate", [](const auto& req, auto& res) {
+			res.set_header("Access-Control-Allow-Origin", req.get_header_value("Origin").c_str());
+			res.set_header("Allow", "GET, POST, HEAD, OPTIONS");
+			res.set_header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, Origin, Authorization");
+			res.set_header("Access-Control-Allow-Methods", "OPTIONS, GET, POST, HEAD");
+		});*/
 
 		// set an echo handler
 		global_context.wtwsvr->Post("/echo", [](const httplib::Request &req,
@@ -43,9 +66,10 @@ void start_wtw_http_server()
 			});
 
 			//Avoid CORS Error
-			res.set_header("Access-Control-Allow-Origin", "*");
+			//res.set_header("Access-Control-Allow-Origin", "*");
 
 			res.set_content(body, "text/plain");
+			res.status = 200;
 		});
 		// set a translation handler
 		global_context.wtwsvr->Post(
@@ -60,12 +84,13 @@ void start_wtw_http_server()
 				});
 
 				//Avoid CORS Error
-				res.set_header("Access-Control-Allow-Origin", "*");
+				//res.set_header("Access-Control-Allow-Origin", "*");
 
 				std::string result;
 				int ret = translate_from_json(body, result);
 				if (ret == OBS_POLYGLOT_TRANSLATION_SUCCESS) {
 					res.set_content(result, "text/plain");
+					res.status = 200;
 				} else {
 					res.set_content("Translation failed", "text/plain");
 					res.status = 500;
